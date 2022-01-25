@@ -1,0 +1,8 @@
+Flask==2.0.2
+html-table-parser-python3==0.2.0
+wheel
+pandas==1.4.0
+pprintpp==0.4.0
+openpyxl==3.0.9
+pygsheets==2.0.5
+urllib3==1.26.8

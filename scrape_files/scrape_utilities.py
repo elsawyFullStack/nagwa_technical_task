@@ -51,4 +51,4 @@ def write_to_gsheet(service_file_path, spreadsheet_id, sheet_name, content_dataf
     wks_write.clear('A1', None, '*')
     wks_write.set_dataframe(content_dataframe, (1, 1), encoding='utf-8', fit=True)
     wks_write.frozen_rows = 1
-    print(f"Data Has Been Exported to your sheet {sheet_name} with id{spreadsheet_id}!")
+    print(f"Data Has Been Exported to your sheet: {sheet_name} \nwith id {spreadsheet_id}!")

@@ -61,8 +61,8 @@ print(f"Scraped Data Has Been Exported to an Excel Sheet Named {excel_file_name}
 # Create CSV file
 csv_file_name = 'Best100.csv'
 content_dataframe.to_csv(csv_file_name)
-print(f"Scraped Data Has Been Exported to an CSV File Named {csv_file_name} under the current working "
-      f"Directory/Path{os.getcwd()}")
+print(f"Scraped Data Has Been Exported to an CSV File Named: {csv_file_name}\nunder the current working "
+      f"Directory/Path: {os.getcwd()}")
 
 # Google Sheets Part
 # You Can Access the Sheet form Here

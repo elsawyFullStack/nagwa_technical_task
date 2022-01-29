@@ -11,7 +11,8 @@ from borb.pdf.canvas.layout.table.flexible_column_width_table import FlexibleCol
 from borb.pdf.canvas.layout.image.barcode import Barcode, BarcodeType
 from borb.pdf.canvas.layout.layout_element import LayoutElement
 
-def create_pdf(filename, author ,bookname, filepath='', qrurl=''):
+
+def create_pdf(filename, author, bookname, filepath='', qrurl=''):
     """
     used to create a PDF File for a book cover
     :param filename: the Name of the file
@@ -33,7 +34,7 @@ def create_pdf(filename, author ,bookname, filepath='', qrurl=''):
     # Create PageLayout
     layout: PageLayout = SingleColumnLayout(page)
 
-    # Contact information
+    # Company Logo
     layout.add(
         FlexibleColumnWidthTable(number_of_columns=2, number_of_rows=1)
         .add(
@@ -50,7 +51,6 @@ def create_pdf(filename, author ,bookname, filepath='', qrurl=''):
         )
             .no_borders()
     )
-
 
     # Code to generate a QR code LayoutElement
     qr_code: LayoutElement = Barcode(
@@ -108,5 +108,5 @@ def create_pdf(filename, author ,bookname, filepath='', qrurl=''):
 # the function returns a file with the name provided containing the ur qr code
 # the name and author of book should be in english
 # the file name can be any
-create_pdf(filename="الرقم الكودى", bookname='elsawygit', author="Elsawy",
-           filepath='/home/elsawy/Desktop/', qrurl='https://elsawyFullStack.git')
+# create_pdf(filename="الرقم الكودى", bookname='elsawygit', author="Elsawy",
+#            filepath='/home/elsawy/Desktop/', qrurl='https://elsawyFullStack.git')

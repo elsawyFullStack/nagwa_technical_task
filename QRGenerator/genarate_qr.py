@@ -1,5 +1,8 @@
-import qrcode
+# import qrcode
+#
+# img = qrcode.make("https://github.com/elsawyFullStack")
+#
+# img.save('mygithub.jpg')
 
-img = qrcode.make("https://github.com/elsawyFullStack")
+from .create_pdf import create_pdf
 
-img.save('mygithub.jpg')

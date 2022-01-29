@@ -3,8 +3,9 @@ This file contains all the apis endpoints
 """
 # import flask restful resource
 from flask_restful import Resource, reqparse
+from handle_excel import read, write
 
-
+excel_file_path = '/home/elsawy/courses/BestHundredBooks.xlsx'
 class BestBooks(Resource):
     def get(self):
         """
@@ -12,16 +13,10 @@ class BestBooks(Resource):
         :return: list of all books
         """
         try:
-            parser = reqparse.RequestParser()
-            parser.add_argument('sequence', type=int)
-            book_sequence = parser.parse_args().get('sequence')
-            if book_sequence:
-                print(parser.parse_args())
-                print(parser.parse_args().get('sequence'))
-            books = ['1', '2', '3']
+            books = read(excel_file_path)
 
             return {"message": "success",
-                    "data": {'books': books, 'extra': ''}
+                    "data": {'books': books}
                     }
 
         except:
@@ -34,7 +29,29 @@ class BestBooks(Resource):
         """
         the implementation of create/add functionality the 'C' in CRUD
         """
-        return {"message": "Successfuly added {}".format("Add")}
+        # this should get the request data and append to alist
+        # the list should be of the same order the file columns
+
+        # parse the request data
+        parser = reqparse.RequestParser()
+        parser.add_argument('sequence', type=int)   # الترتيب
+        parser.add_argument('novel', type=str)      # الروايه
+        parser.add_argument('author', type=str)     # المؤلف
+        parser.add_argument('country', type=str)    # البلد
+        parser.add_argument('link', type=str)       # الرابط
+
+        # get the params
+        book_sequence = parser.parse_args().get('sequence')
+        book_name = parser.parse_args().get('novel')
+        book_author = parser.parse_args().get('author')
+        book_country = parser.parse_args().get('country')
+        book_link = parser.parse_args().get('link', '')
+
+        if book_sequence and book_name and book_author and book_country:
+            write(excel_file_path, [book_sequence, book_name,book_author, book_country, book_link])
+            return {"message": "Successfuly added {}".format("Add")}
+
+        return {"message": "Error Happened Make Sure you sent all the params with the right type!"}
 
     def put(self):
         """

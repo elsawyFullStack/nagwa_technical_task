@@ -10,7 +10,7 @@ Files to have: the access key for the Google apis (.json) file
 """
 import os
 # import utility functions
-from scrape_utilities import url_get_contents, write_to_gsheet
+from scrape_utilities import url_get_contents, write_to_gsheet, get_urls
 
 # pretty-print python data structures
 from pprint import pprint
@@ -24,7 +24,6 @@ import pandas as pd
 
 # the url of the website
 best_hundred_books = 'https://ar.wikipedia.org/wiki/%D9%82%D8%A7%D8%A6%D9%85%D8%A9_%D8%A3%D9%81%D8%B6%D9%84_%D9%85%D8%A6%D8%A9_%D8%B1%D9%88%D8%A7%D9%8A%D8%A9_%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9'
-
 # get Extensible HyperText Markup Language for the web page
 xhtml = url_get_contents(best_hundred_books).decode('utf-8')
 
@@ -38,8 +37,14 @@ parser.feed(xhtml)
 # ( we are obtaining the first and only existing table in the website
 pprint(parser.tables[0])
 
+# get the links from the table
+links = get_urls(best_hundred_books)
+
 # converting the parsed data to dataframe
 content_dataframe = pd.DataFrame(parser.tables[0])
+
+# add the links to the data frame of the table
+content_dataframe[4] = links
 
 # Show the data frame in the console
 print(f"PANDAS DATAFRAME\n{content_dataframe}")
@@ -55,6 +60,8 @@ print(f"PANDAS DATAFRAME\n{content_dataframe}")
 # Create Excel Sheet
 excel_file_name = 'BestHundredBooks.xlsx'
 content_dataframe.to_excel(excel_file_name, index=False, header=False)
+
+
 print(f"Scraped Data Has Been Exported to an Excel Sheet Named {excel_file_name} under the current working "
       f"Directory/Path{os.getcwd()}")
 

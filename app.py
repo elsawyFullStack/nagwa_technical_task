@@ -10,7 +10,6 @@ logger.basicConfig(level="DEBUG")
 
 flaskAppInstance = Flask(__name__)
 
-if __name__ == 'main':
-    logger.debug("Start APP")
 
-    flaskAppInstance.run(host='0.0.0.0', port=5000, debug=True, use_reloader=True)
+from application_apis import *
+flaskAppInstance.run(host='0.0.0.0', port=5000, debug=True, use_reloader=True)

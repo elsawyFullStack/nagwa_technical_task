@@ -5,6 +5,9 @@ Usage: Contains the Implementation to
 # firstly importing libraries needed
 # to send http requests
 import urllib.request
+import requests
+# beautiful soup (get data using html filters)
+from bs4 import BeautifulSoup
 
 # use this library to send data to a Google sheet
 # using Google apis
@@ -36,19 +39,50 @@ def write_to_gsheet(service_file_path, spreadsheet_id, sheet_name, content_dataf
     :param content_dataframe   the dataframe to be exported
     """
     # connect to google sheet api
-    google_connect = pygsheets.authorize(service_file=service_file_path)
+    try:
+        google_connect = pygsheets.authorize(service_file=service_file_path)
+    except:
+        print("You Did Not Have Access To Google API, please make sure you have the "
+              "authorization key and passing its path correctly")
 
     # spreadsheet in your project
-    spreadsheet = google_connect.open_by_key(spreadsheet_id)
-
+    try:
+        spreadsheet = google_connect.open_by_key(spreadsheet_id)
+    except:
+        print("Error Happened Make sure of the provided sheet id!")
     try:
         # add sheet if not existing otherwise overwrite it
         spreadsheet.add_worksheet(sheet_name)
     except:
-        pass
+        print("Something Wrong happened , Please make sure you provided the correct sheet name")
     # write to the sheet
     wks_write = spreadsheet.worksheet_by_title(sheet_name)
     wks_write.clear('A1', None, '*')
     wks_write.set_dataframe(content_dataframe, (1, 1), encoding='utf-8', fit=True)
     wks_write.frozen_rows = 1
     print(f"Data Has Been Exported to your sheet: {sheet_name} \nwith id {spreadsheet_id}!")
+
+
+# initialize the list with hte header that will be in the excel sheet
+links = ['الرابط']
+
+
+def get_urls(url):
+    """
+    used to Get the table links for only the names
+    can be extended to get all the links if required
+    :param url: the website url
+    :return: list of links
+    """
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+
+    books_table = soup.find_all('table')[0]
+    for row in books_table.find_all('tr'):
+        for i in range(len(row.find_all('td'))):
+            if i == 1:
+                print(row.find_all('td')[i].find('a').attrs['href'])
+                print('=======')
+                links.append('https://ar.wikipedia.org' + row.find_all('td')[i].find('a').attrs['href'])
+
+    return links

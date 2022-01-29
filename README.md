@@ -13,4 +13,17 @@ Assessment Task For Nagwa
 
 # Parts
  ### Part 1
-###Data scraping 
+####Data scraping 
+    RUN : scrape_files/scrape.py
+
+ ### Part 2
+#### Apis
+    RUN: flask run
+
+### Part 3     
+#### PDF and QR Code Generator
+the structure contains package for QR generator
+which exports a PDF file containing the QR Code
+to use separately you can .
+###
+    RUN: QRGenerator/create_pdf

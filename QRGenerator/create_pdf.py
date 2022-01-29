@@ -11,12 +11,14 @@ from borb.pdf.canvas.layout.table.flexible_column_width_table import FlexibleCol
 from borb.pdf.canvas.layout.image.barcode import Barcode, BarcodeType
 from borb.pdf.canvas.layout.layout_element import LayoutElement
 
-
-def create_pdf(name, author , path=''):
+def create_pdf(filename, author ,bookname, filepath='', qrurl=''):
     """
     used to create a PDF File for a book cover
-    :param name: the Name of the file (Book Name)
-    :param path: the place to save this file should end with /
+    :param filename: the Name of the file
+    :param bookname: the book name that will be internally saved with no arabic support
+    :param filepath: the place to save this file should end with
+    :param author: the book author(does not accept arabic)
+    :param qrurl: th uri to generate qrcode for
     :return: PDF File with the given name under the given Path containing the given QR
     """
     # Create empty Document
@@ -80,11 +82,11 @@ def create_pdf(name, author , path=''):
     )
 
     page.append_remote_go_to_annotation(
-        qr_code.get_bounding_box(), uri="https://www.borbpdf.com"
+        qr_code.get_bounding_box(), uri=qrurl
     )
     layout.add(
         Paragraph(
-            name,
+            bookname,
             font_color=HexColor("#228B22"),
             font_size=Decimal(50)
         )
@@ -98,10 +100,13 @@ def create_pdf(name, author , path=''):
         )
     )
     # Attempt to store PDF
-    with open(path + name + ".pdf", "wb") as pdf_file_handle:
+    with open(filepath + filename + ".pdf", "wb") as pdf_file_handle:
         PDF.dumps(pdf_file_handle, pdf)
 
 
 
-
-create_pdf("klsks","Elsawy" , '/home/elsawy/Desktop/')
+# the function returns a file with the name provided containing the ur qr code
+# the name and author of book should be in english
+# the file name can be any
+create_pdf(filename="الرقم الكودى", bookname='elsawygit', author="Elsawy",
+           filepath='/home/elsawy/Desktop/', qrurl='https://elsawyFullStack.git')

@@ -89,6 +89,7 @@ def create_pdf(name, author , path=''):
             font_size=Decimal(50)
         )
     )
+
     layout.add(
         Paragraph(
             f'Author: {author}',

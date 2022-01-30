@@ -17,7 +17,7 @@ def create_pdf(filename, author, bookname, filepath='', qrurl=''):
     used to create a PDF File for a book cover
     :param filename: the Name of the file
     :param bookname: the book name that will be internally saved with no arabic support
-    :param filepath: the place to save this file should end with
+    :param filepath: the place to save this file should end with /
     :param author: the book author(does not accept arabic)
     :param qrurl: th uri to generate qrcode for
     :return: PDF File with the given name under the given Path containing the given QR
@@ -107,6 +107,6 @@ def create_pdf(filename, author, bookname, filepath='', qrurl=''):
 
 # the function returns a file with the name provided containing the ur qr code
 # the name and author of book should be in english
-# the file name can be any
+# # the file name can be any
 # create_pdf(filename="الرقم الكودى", bookname='elsawygit', author="Elsawy",
-#            filepath='/home/elsawy/Desktop/', qrurl='https://elsawyFullStack.git')
+#            filepath='/home/elsawy/courses/', qrurl='https://elsawyFullStack.git')

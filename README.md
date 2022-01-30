@@ -21,7 +21,12 @@ Data also will be saved to google sheet and make sure you have the access key an
     Start your Server
     e.g RUN: flask run
 
+#### 4 - To Create The Books Cover You should go to QRGenerator/create_book_covers and set the paths of the files and the place where you will save the books covers.
 
+
+    RUN create_book_covers.py
+
+You will Get Files under the path you will provide with each file name containing the QR for the book hyperlink
 ##Note:
             Python Version should be >= 7.x.x.x
 

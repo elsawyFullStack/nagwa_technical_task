@@ -17,7 +17,7 @@ def generate_book_cover(from_file, sheet, to_path=''):
         print(row[1])
         try:
             create_pdf(filename=row[1], filepath=to_path, bookname='Book Name , sorry for not supporting arabic',
-                       author='Author Name', qrurl='https://github')
+                       author='Author Name', qrurl=row[4])
 
         except:
             print("Probl")

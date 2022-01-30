@@ -13,14 +13,12 @@ def generate_book_cover(from_file, sheet, to_path=''):
     data_frame = data_frame.reset_index()
 
     for index, row in data_frame.iterrows():
-        print('index:', index)
-        print(row[1])
-        try:
-            create_pdf(filename=row[1], filepath=to_path, bookname='Book Name , sorry for not supporting arabic',
-                       author='Author Name', qrurl=row[4])
+            try:
+                create_pdf(filename=row[2], filepath=to_path, bookname='Book Name , sorry for not supporting arabic',
+                           author='Author Name', qrurl=row[5])
 
-        except:
-            print("Probl")
-            pass
+            except Exception as e:
+                print("Probl", e)
+                pass
 
-generate_book_cover(from_file='/home/elsawy/courses/BestHundredBooks.xlsx', sheet='Sheet1', to_path='/home/elsawy/courses/')
+generate_book_cover(from_file='/home/elsawy/courses/nagwa_technical_task/scraping_output/BestHundredBooks.xlsx', sheet='Sheet1', to_path='/home/elsawy/courses/nagwa_technical_task/book_vovers/')

@@ -58,7 +58,7 @@ print(f"PANDAS DATAFRAME\n{content_dataframe}")
 """
 
 # Create Excel Sheet
-excel_file_name = 'BestHundredBooks.xlsx'
+excel_file_name = 'scraping_output/BestHundredBooks.xlsx'
 content_dataframe.to_excel(excel_file_name, index=False, header=False)
 
 
@@ -66,7 +66,7 @@ print(f"Scraped Data Has Been Exported to an Excel Sheet Named {excel_file_name}
       f"Directory/Path{os.getcwd()}")
 
 # Create CSV file
-csv_file_name = 'Best100.csv'
+csv_file_name = 'scraping_output/Best100.csv'
 content_dataframe.to_csv(csv_file_name, index=False, header=False)
 print(f"Scraped Data Has Been Exported to an CSV File Named: {csv_file_name}\nunder the current working "
       f"Directory/Path: {os.getcwd()}")
